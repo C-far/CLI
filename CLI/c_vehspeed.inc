@@ -96,12 +96,6 @@ enum cli_speed_unit
 
 stock SetVehicleSpeed(const vehicleid, speed, const cli_speed_unit:unit=kmh)
 {
-	switch(unit)
-	{
-		case mph: speed = ConvertMphToKmh(speed);
-		case knot: speed = ConvertKnotToKmh(speed);
-	}
-
 	static
 		Float:vel[3];
 		
@@ -109,13 +103,18 @@ stock SetVehicleSpeed(const vehicleid, speed, const cli_speed_unit:unit=kmh)
 
 	if(vel[0] == 0.0 && vel[1] == 0.0 && vel[2] == 0.0) return 0;
 	
+	switch(unit)
+	{
+		case mph: speed = ConvertMphToKmh(speed);
+		case knot: speed = ConvertKnotToKmh(speed);
+	}	
+	
 	new
-		actualspeed = GetVehicleSpeed(vehicleid, kmh),
-		Float:multiple = (speed + float(actualspeed) / 100) / (float(actualspeed) / 100) / 113.8333335;
+		Float:actualspeed = float(GetVehicleSpeed(vehicleid, kmh)) / 100.0,
+		Float:multiple = (speed + actualspeed) / actualspeed / 113.8333335;
 	
 	return SetVehicleVelocity(vehicleid, vel[0] * multiple, vel[1] * multiple, vel[2] * multiple);
 }
-
 //-----------------------------
 
 stock GetVehicleSpeed(const vehicleid, const cli_speed_unit:unit=kmh) 
