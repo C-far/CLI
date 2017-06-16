@@ -17,6 +17,6 @@ c_time - 0.2
 
 c_uid - 0.2
 
-c_vehcat - 0.3
+c_vehcat - 0.4
 
 c_vehspeed - 0.4
