@@ -1,0 +1,7 @@
+{
+	"user": "C_far",
+	"repo": "CLI",
+	"dependencies": [
+    "Southclaws/samp-stdlib"
+   ]
+}
